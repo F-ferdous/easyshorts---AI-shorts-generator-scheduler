@@ -21,6 +21,14 @@ import {
     Layout,
     Globe
 } from "lucide-react"
+import {
+    SignInButton,
+    SignUpButton,
+    SignedIn,
+    SignedOut,
+    UserButton,
+} from "@clerk/nextjs"
+import Link from "next/link"
 
 export function LandingPage() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false)
@@ -41,9 +49,19 @@ export function LandingPage() {
                         <a href="#features" className="text-sm text-slate-400 hover:text-white transition-colors">Features</a>
                         <a href="#how-it-works" className="text-sm text-slate-400 hover:text-white transition-colors">How it works</a>
                         <a href="#pricing" className="text-sm text-slate-400 hover:text-white transition-colors">Pricing</a>
-                        <Button size="sm" className="bg-purple-600 hover:bg-purple-700 text-white border-none shadow-lg shadow-purple-500/20">
-                            Get Started
-                        </Button>
+                        <SignedOut>
+                            <SignInButton mode="modal">
+                                <Button size="sm" className="bg-purple-600 hover:bg-purple-700 text-white border-none shadow-lg shadow-purple-500/20">
+                                    Get Started
+                                </Button>
+                            </SignInButton>
+                        </SignedOut>
+                        <SignedIn>
+                            <div className="flex items-center gap-6">
+                                <Link href="/dashboard" className="text-sm text-slate-400 hover:text-white transition-colors">Dashboard</Link>
+                                <UserButton />
+                            </div>
+                        </SignedIn>
                     </div>
 
                     <button className="md:hidden text-slate-400" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -57,7 +75,17 @@ export function LandingPage() {
                         <a href="#features" className="text-slate-400">Features</a>
                         <a href="#how-it-works" className="text-slate-400">How it works</a>
                         <a href="#pricing" className="text-slate-400">Pricing</a>
-                        <Button className="w-full bg-purple-600">Get Started</Button>
+                        <SignedOut>
+                            <SignInButton mode="modal">
+                                <Button className="w-full bg-purple-600">Get Started</Button>
+                            </SignInButton>
+                        </SignedOut>
+                        <SignedIn>
+                            <div className="flex items-center gap-4">
+                                <span className="text-sm text-slate-400">My Account</span>
+                                <UserButton />
+                            </div>
+                        </SignedIn>
                     </div>
                 )}
             </nav>
@@ -83,9 +111,20 @@ export function LandingPage() {
                         The ultimate SaaS for creators and marketers.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Button size="lg" className="h-12 px-8 bg-purple-600 hover:bg-purple-700 text-white rounded-full shadow-xl shadow-purple-500/25">
-                            Start Generating for Free <ArrowRight className="ml-2 w-4 h-4" />
-                        </Button>
+                        <SignedIn>
+                            <Link href="/dashboard">
+                                <Button size="lg" className="h-12 px-8 bg-purple-600 hover:bg-purple-700 text-white rounded-full shadow-xl shadow-purple-500/25">
+                                    Go to Dashboard <ArrowRight className="ml-2 w-4 h-4" />
+                                </Button>
+                            </Link>
+                        </SignedIn>
+                        <SignedOut>
+                            <SignInButton mode="modal">
+                                <Button size="lg" className="h-12 px-8 bg-purple-600 hover:bg-purple-700 text-white rounded-full shadow-xl shadow-purple-500/25">
+                                    Start Generating for Free <ArrowRight className="ml-2 w-4 h-4" />
+                                </Button>
+                            </SignInButton>
+                        </SignedOut>
                         <Button variant="outline" size="lg" className="h-12 px-8 rounded-full border-white/10 hover:bg-white/5 transition-all text-slate-300">
                             Watch Demo <PlayCircle className="ml-2 w-4 h-4" />
                         </Button>
