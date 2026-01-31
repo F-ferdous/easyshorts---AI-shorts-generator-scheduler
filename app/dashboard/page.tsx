@@ -1,4 +1,5 @@
 import { Zap, Calendar, Mail, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export default function DashboardPage() {
     return (
@@ -9,7 +10,7 @@ export default function DashboardPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="group bg-white border border-slate-200 rounded-3xl p-8 hover:border-purple-600/50 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300 flex flex-col items-start cursor-pointer">
+                <Link href="/dashboard/create" className="group bg-white border border-slate-200 rounded-3xl p-8 hover:border-purple-600/50 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300 flex flex-col items-start cursor-pointer">
                     <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <Zap className="text-purple-600 w-6 h-6 fill-purple-600" />
                     </div>
@@ -18,9 +19,10 @@ export default function DashboardPage() {
                     <div className="mt-auto flex items-center gap-2 text-purple-600 font-semibold group-hover:translate-x-1 transition-transform">
                         Get started <ArrowRight className="w-4 h-4" />
                     </div>
-                </div>
+                </Link>
 
                 <div className="group bg-white border border-slate-200 rounded-3xl p-8 hover:border-blue-600/50 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col items-start cursor-pointer">
+                    {/* ... (Calendar content) */}
                     <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <Calendar className="text-blue-600 w-6 h-6" />
                     </div>
@@ -32,6 +34,7 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="group bg-white border border-slate-200 rounded-3xl p-8 hover:border-pink-600/50 hover:shadow-xl hover:shadow-pink-500/5 transition-all duration-300 flex flex-col items-start cursor-pointer">
+                    {/* ... (Mail content) */}
                     <div className="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <Mail className="text-pink-600 w-6 h-6" />
                     </div>
@@ -49,9 +52,11 @@ export default function DashboardPage() {
                         <h2 className="text-2xl font-bold mb-2">Ready to go viral?</h2>
                         <p className="text-indigo-100/80 max-w-md">Our AI engine has been updated with the latest trends. Start generating shorts that capture attention.</p>
                     </div>
-                    <button className="px-8 py-4 bg-white text-indigo-600 rounded-2xl font-bold hover:bg-slate-50 transition-colors shadow-lg shadow-indigo-900/20 whitespace-nowrap">
-                        New Series +
-                    </button>
+                    <Link href="/dashboard/create">
+                        <button className="px-8 py-4 bg-white text-indigo-600 rounded-2xl font-bold hover:bg-slate-50 transition-colors shadow-lg shadow-indigo-900/20 whitespace-nowrap">
+                            New Series +
+                        </button>
+                    </Link>
                 </div>
                 {/* Decorative background circle */}
                 <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none" />
